@@ -7,6 +7,7 @@ const upload = require("../middleware/uploadMiddleware");
 const {
   uploadFile,
   getFiles,
+  deleteFile,
 } = require("../controllers/fileController");
 
 router.post(
@@ -16,5 +17,7 @@ router.post(
 );
 
 router.get("/", getFiles);
+
+router.delete("/:id", deleteFile);
 
 module.exports = router;
