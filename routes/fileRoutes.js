@@ -6,6 +6,7 @@ const upload = require("../middleware/uploadMiddleware");
 
 const {
   uploadFile,
+  getFiles,
 } = require("../controllers/fileController");
 
 router.post(
@@ -13,5 +14,7 @@ router.post(
   upload.single("file"),
   uploadFile
 );
+
+router.get("/", getFiles);
 
 module.exports = router;
