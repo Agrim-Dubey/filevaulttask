@@ -16,7 +16,12 @@ const fileRoutes = require("./routes/fileRoutes");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN || "*",
+    methods: ["GET", "POST", "DELETE"],
+  })
+);
 app.use(express.json());
 
 app.use(
