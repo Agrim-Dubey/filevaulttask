@@ -22,6 +22,13 @@ const uploadFile = async (req, res) => {
       file: newFile,
     });
   } catch (error) {
+    // Handle multer-specific errors
+    if (error.code === "LIMIT_FILE_SIZE") {
+      return res.status(400).json({
+        message: "File too large. Maximum size is 10MB",
+      });
+    }
+
     console.log(error);
 
     res.status(500).json({
