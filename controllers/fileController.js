@@ -56,7 +56,12 @@ const deleteFile = async (req, res) => {
       });
     }
 
-    fs.unlinkSync(file.path);
+    // Use async unlink; ignore error if file already removed from disk
+    try {
+      await fs.promises.unlink(file.path);
+    } catch (unlinkErr) {
+      if (unlinkErr.code !== "ENOENT") throw unlinkErr;
+    }
 
     await File.findByIdAndDelete(req.params.id);
 
